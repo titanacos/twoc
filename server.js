@@ -9,7 +9,10 @@ var config = require('./config')
 var bodyParser = require('body-parser');
 // APP CONFIGURATION ---------------------------------
 
-
+mongoose.connect(config.database, function(err, res) {
+	if (err) throw err;
+	console.log('connected to database');
+});
 
 // use body-parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({extended:true}));
