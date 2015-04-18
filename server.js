@@ -7,6 +7,7 @@ var app = express();
 var mongoose = require('mongoose');
 var config = require('./config')
 var bodyParser = require('body-parser');
+var Polen = require('./app/models/pollenes');
 // APP CONFIGURATION ---------------------------------
 
 mongoose.connect(config.database, function(err, res) {
@@ -23,11 +24,22 @@ app.get('/', function(req, res) {
 	res.send('Welcome to our homepage')
 });
 
-app.get('/saludame', function(req, res) {
-	console.log(req);
-	res.send('saludado');
+// routes
+var apiRouter = express.Router();
 
+apiRouter.get('/', function(req, res) {
+	res.json({ message: 'bienvenido a la api will and victor'})
 });
+
+apiRouter.route('/datos')
+	.get(function(req, res) {
+		Polen.find(function(err, datos) {
+			if (err) res.send(err);
+
+			res.json({message: "rulando"});
+		});
+	});
+app.use('/api', apiRouter);
 
 // START THE SERVER
 // ======================================
