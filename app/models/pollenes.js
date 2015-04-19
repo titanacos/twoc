@@ -3,11 +3,19 @@ var Schema = mongoose.Schema;
 
 var pollenSchema = new Schema({
 
-	ciudad: String,
-	fecha: String,
-	valores: Number,
-	parametro: String,
-	notes: String
+	titulo: String,
+	autor: String,
+	ISBN: String,
+	imgLink: String,
+	localizacion: String
 });
 
+var userSchema = new Schema({
+
+    nombre : String,
+    ciudad: String
+
+});
+
+module.exports = mongoose.model('Users', userSchema);
 module.exports = mongoose.model('Pollen', pollenSchema);
