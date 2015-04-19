@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var config = require('./config')
 var bodyParser = require('body-parser');
 var Polen = require('./app/models/pollenes');
+var path = require('path');
 // APP CONFIGURATION ---------------------------------
 
 mongoose.connect(config.database, function(err, res) {
@@ -20,8 +21,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 // basic route for the homepage
-app.get('/', function(req, res) {
-    res.send('Welcome to our homepage')
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
 // routes
