@@ -7,7 +7,9 @@ var app = express();
 var mongoose = require('mongoose');
 var config = require('./config')
 var bodyParser = require('body-parser');
-var Polen = require('./app/models/pollenes');
+var Usuario = require('./app/models/pollenes');
+var Libro = require('./app/models/pollenes');
+var request = require('request');
 var path = require('path');
 // APP CONFIGURATION ---------------------------------
 
@@ -42,26 +44,26 @@ apiRouter.get('/', function(req, res) {
 apiRouter.route('/libros')
 
     .post(function(req,res) {
-        var polen = new Polen();
+        var libro = new Libro();
 
-		polen.titulo = req.body.titulo;
-		polen.autor = req.body.autor;
-		polen.ISBN = req.body.ISBN;
-		polen.imgLink = req.body.imgLink;
-		polen.localizacion = req.body.localizacion;
+		libro.titulo = req.body.titulo;
+		libro.autor = req.body.autor;
+		libro.ISBN = req.body.ISBN;
+		libro.imgLink = req.body.imgLink;
+		libro.localizacion = req.body.localizacion;
 
-        polen.save(function(err) {
+        libro.save(function(err) {
             if (err) {
                 if (err.code == 11000)
-                    return res.json({ success: false, message: 'Un polen con esos datos ya existe'});
+                    return res.json({ success: false, message: 'Un libro con esos datos ya existe'});
                 else
                     return res.send(err);
             }
-            res.json({ message: 'polen creado'})
+            res.json({ message: 'libros creado'})
         })
     })
     .get(function(req, res) {
-        Polen.find(function(err, datos) {
+        Libro.find(function(err, datos) {
             if (err) res.send(err);
 
             res.json(datos);
@@ -71,7 +73,7 @@ apiRouter.route('/libros')
 apiRouter.route('/libros/:libro_id')
 
     .get(function(req, res) {
-        Polen.findById(req.params.dato_id, function(err, dato) {
+        Libro.findById(req.params.dato_id, function(err, dato) {
             if (err) res.send(err);
 
             res.json(dato);
@@ -79,26 +81,26 @@ apiRouter.route('/libros/:libro_id')
     })
 
     .put(function(req, res) {
-        Polen.findById(req.params.dato_id, function(err, polen) {
+        Libro.findById(req.params.dato_id, function(err, libros) {
             if (err) res.send(err);
 
-			if (req.body.titulo) polen.titulo = req.body.titulo;
-			if (req.body.autor) polen.autor = req.body.autor;
-			if (req.body.ISBN) polen.ISBN = req.body.ISBN;
-			if (req.body.imgLink) polen.imgLink = req.body.imgLink;
-			if (req.body.localizacion) polen.localizacion = req.body.localizacion;
+			if (req.body.titulo) libros.titulo = req.body.titulo;
+			if (req.body.autor) libros.autor = req.body.autor;
+			if (req.body.ISBN) libros.ISBN = req.body.ISBN;
+			if (req.body.imgLink) libros.imgLink = req.body.imgLink;
+			if (req.body.localizacion) libros.localizacion = req.body.localizacion;
 
-            polen.save(function(err) {
+            libros.save(function(err) {
                 if (err) res.send(err);
 
-                res.json({message: 'polen actualizado'})
+                res.json({message: 'libros actualizado'})
             });
 
         });
     })
 
     .delete(function(req, res) {
-        Polen.remove({
+        Libro.remove({
             _id: req.params.dato_id
         }, function(err, dato) {
             if (err) return res.send(err);
@@ -109,33 +111,33 @@ apiRouter.route('/libros/:libro_id')
 apiRouter.route('/usuarios')
 
     .post(function(req,res) {
-        var polen = new Polen();
+        var usuario = new Usuario();
 
-        polen.nombre = req.body.nombre;
-        polen.ciudad = req.body.ciudad;
+        usuario.nombre = req.body.nombre;
+        usuario.ciudad = req.body.ciudad;
 
-        polen.save(function(err) {
+        usuario.save(function(err) {
             if (err) {
                 if (err.code == 11000)
-                    return res.json({ success: false, message: 'Un polen con esos datos ya existe'});
+                    return res.json({ success: false, message: 'Un usuario con esos datos ya existe'});
                 else
                     return res.send(err);
             }
-            res.json({ message: 'polen creado'})
+            res.json({ message: 'usuario creado'})
         })
     })
     .get(function(req, res) {
-        Polen.find(function(err, datos) {
+        Usuario.find(function(err, datos) {
             if (err) res.send(err);
 
             res.json(datos);
         });
     });
 
-apiRouter.route('/libros/:libro_id')
+apiRouter.route('/usuarios/:usuario_id')
 
     .get(function(req, res) {
-        Polen.findById(req.params.dato_id, function(err, dato) {
+        Usuario.findById(req.params.dato_id, function(err, dato) {
             if (err) res.send(err);
 
             res.json(dato);
@@ -143,23 +145,23 @@ apiRouter.route('/libros/:libro_id')
     })
 
     .put(function(req, res) {
-        Polen.findById(req.params.dato_id, function(err, polen) {
+        Usuario.findById(req.params.dato_id, function(err, usuario) {
             if (err) res.send(err);
 
-            if (req.body.nombre) polen.nombre = req.body.nombre;
-            if (req.body.ciudad) polen.ciudad = req.body.ciudad;
+            if (req.body.nombre) usuario.nombre = req.body.nombre;
+            if (req.body.ciudad) usuario.ciudad = req.body.ciudad;
 
-            polen.save(function(err) {
+            usuario.save(function(err) {
                 if (err) res.send(err);
 
-                res.json({message: 'polen actualizado'})
+                res.json({message: 'usuario actualizado'})
             });
 
         });
     })
 
     .delete(function(req, res) {
-        Polen.remove({
+        Usuario.remove({
             _id: req.params.dato_id
         }, function(err, dato) {
             if (err) return res.send(err);
@@ -168,6 +170,24 @@ apiRouter.route('/libros/:libro_id')
         });
     });
 
+app.get('/getBook',function(req,res){
+
+ var param =req.query.word;
+  var url = 'http://openlibrary.org/api/things?query={"type": ' + param + ' , "isbn_10":"0789312239"}';
+  request(url, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+
+      //console.log(response);
+      var jSon= JSON.parse(body);
+
+      console.log(body);
+      console.log(jSon.result[0]);
+    }
+    res.send("deberias hacer algo");
+  });
+
+
+});
 
 app.use('/api', apiRouter);
 

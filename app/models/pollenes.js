@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var pollenSchema = new Schema({
+var librosSchema = new Schema({
 
 	titulo: String,
 	autor: String,
@@ -10,12 +10,12 @@ var pollenSchema = new Schema({
 	localizacion: String
 });
 
-var userSchema = new Schema({
+var usuarioSchema = new Schema({
 
     nombre : String,
     ciudad: String
 
 });
 
-module.exports = mongoose.model('Users', userSchema);
-module.exports = mongoose.model('Pollen', pollenSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('Libro', librosSchema);
