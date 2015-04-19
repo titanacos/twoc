@@ -268,7 +268,7 @@ app.get('/getBookcase',function(req,res){
 
 //https://covers.openlibrary.org/w/id/980334-M.jpg
 
-        var author_req =req.query.author;
+        var author_req =req.query.title;
         var url = 'http://openlibrary.org/search.json?author=' + author_req;
 
         // We need next fileds of the specified url
@@ -293,21 +293,15 @@ app.get('/getBookcase',function(req,res){
                     isbn : jSon_request.docs[0].isbn[0]
                 };
 
-                var bookcase = new Array();
+                var bookcase = [];
 
-                for (var i = 0; i < jSon_request.docs.length; i++) {
+                for (var i = 0; i < jSon_request.docs[0].length; i++) {
 
-                    bookcase.push(
-                        {
-                            title: jSon_request.docs[i].title,
-                            img : 'https://covers.openlibrary.org/w/id/' + jSon_request.docs[i].cover_i + '-M.jpg'
-                        }
-                                 )
+                    bookcase.push(jSon_answer)
                 }
 
                 // Answering to navigator
-                console.log(bookcase);
-                res.send(bookcase);
+                res.send({bookcase});
 
 
 
