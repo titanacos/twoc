@@ -38,16 +38,16 @@ apiRouter.get('/', function(req, res) {
 	res.json({ message: 'bienvenido a la api will and victor'})
 });
 
-apiRouter.route('/datos')
+apiRouter.route('/libros')
 
 	.post(function(req,res) {
 		var polen = new Polen();
 
-		polen.ciudad = req.body.ciudad;
-		polen.fecha = req.body.fecha;
-		polen.valores = req.body.valores;
-		polen.parametro = req.body.parametro;
-		polen.notes = req.body.notes;
+		polen.titulo = req.body.titulo;
+		polen.autor = req.body.autor;
+		polen.ISBN = req.body.ISBN;
+		polen.imgLink = req.body.imgLink;
+		polen.localizacion = req.body.localizacion;
 
 		polen.save(function(err) {
 			if (err) {
@@ -67,7 +67,7 @@ apiRouter.route('/datos')
 		});
 	});
 
-apiRouter.route('/datos/:dato_id')
+apiRouter.route('/libros/:libro_id')
 
 	.get(function(req, res) {
 		Polen.findById(req.params.dato_id, function(err, dato) {
@@ -81,11 +81,11 @@ apiRouter.route('/datos/:dato_id')
 		Polen.findById(req.params.dato_id, function(err, polen) {
 			if (err) res.send(err);
 
-			if (req.body.ciudad) polen.ciudad = req.body.ciudad;
-			if (req.body.fecha) polen.fecha = req.body.fecha;
-			if (req.body.valores) polen.valores = req.body.valores;
-			if (req.body.parametro) polen.parametro = req.body.parametro;
-			if (req.body.notes) polen.notes = req.body.notes;
+			if (req.body.titulo) polen.titulo = req.body.titulo;
+			if (req.body.autor) polen.autor = req.body.autor;
+			if (req.body.ISBN) polen.ISBN = req.body.ISBN;
+			if (req.body.imgLink) polen.imgLink = req.body.imgLink;
+			if (req.body.localizacion) polen.localizacion = req.body.localizacion;
 
 			polen.save(function(err) {
 				if (err) res.send(err);
@@ -105,7 +105,67 @@ apiRouter.route('/datos/:dato_id')
 			res.json({message: 'Se ha eliminado'})
 		});
 	});
+apiRouter.route('/usuarios')
 
+    .post(function(req,res) {
+        var polen = new Polen();
+
+        polen.nombre = req.body.nombre;
+        polen.ciudad = req.body.ciudad;
+
+        polen.save(function(err) {
+            if (err) {
+                if (err.code == 11000)
+                    return res.json({ success: false, message: 'Un polen con esos datos ya existe'});
+                else
+                    return res.send(err);
+            }
+            res.json({ message: 'polen creado'})
+        })
+    })
+    .get(function(req, res) {
+        Polen.find(function(err, datos) {
+            if (err) res.send(err);
+
+            res.json(datos);
+        });
+    });
+
+apiRouter.route('/libros/:libro_id')
+
+    .get(function(req, res) {
+        Polen.findById(req.params.dato_id, function(err, dato) {
+            if (err) res.send(err);
+
+            res.json(dato);
+        });
+    })
+
+    .put(function(req, res) {
+        Polen.findById(req.params.dato_id, function(err, polen) {
+            if (err) res.send(err);
+
+            if (req.body.nombre) polen.nombre = req.body.nombre;
+            if (req.body.ciudad) polen.ciudad = req.body.ciudad;
+
+            polen.save(function(err) {
+                if (err) res.send(err);
+
+                res.json({message: 'polen actualizado'})
+            });
+
+        });
+    })
+
+    .delete(function(req, res) {
+        Polen.remove({
+            _id: req.params.dato_id
+        }, function(err, dato) {
+            if (err) return res.send(err);
+
+            res.json({message: 'Se ha eliminado'})
+        });
+    });
 
 
 app.use('/api', apiRouter);
