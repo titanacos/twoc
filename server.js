@@ -27,6 +27,20 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
+app.get("/dameLibros",function(req,res,next){
+
+  var json= {libros:[{"nombre":"After", "img": "http://image.casadellibro.com/a/l/t0/37/9788408133537.jpg"},
+    {"nombre":"After",
+        "img": "http://image.casadellibro.com/a/l/t0/37/9788408133537.jpg"},{"nombre":"After",
+        "img": "http://image.casadellibro.com/a/l/t0/37/9788408133537.jpg"},{"nombre":"After",
+        "img": "http://image.casadellibro.com/a/l/t0/37/9788408133537.jpg"},
+    ]
+  };
+
+  res.send(json);
+  //res.sendFile(path.join(__dirname + '/libros.json'));
+
+});
 // routes
 var apiRouter = express.Router();
 

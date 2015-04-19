@@ -1,34 +1,106 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>libros</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<!--	bower:css	-->
-		<!--	endbower	-->
-		<!--	inject:css	-->
-		<!--	endinject	-->
+        <link rel="stylesheet" type="text/css" href="app/assets/libraries/bootstrap-3.3.4/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="app/assets/libraries/bootstrap-3.3.4/dist/css/bootstrap.min.css">
+
+      <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">-->
+        <link rel="stylesheet" href="app/assets/css/style.css">
+
+        <!-- JS -->
+</head>
+
+
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    </head>
-    <body>
+        <body>
+
+
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
-			<!--	bower:js	-->
-			<!--	endbower	-->
-			<!--	inject:js	-->
-			<!--	endinject	-->
+<div class="container-fluid img-responsive">
+	<div class="row">
+		<nav class="navbar navbar-default">
+  			<div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#">Titanacos Libreros</a>
+			    </div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			      </ul>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">Home</a></li>
+			        <li><a href="#">Login</a></li>
+			        <li><a href="#">Help</a></li>
+
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</nav>
+						<p></p>
+			</div>
+		</div>
+
+		<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-black">
+
+				<h1 class="margin-base-vertical">Tienes amigos?</h1>
+
+				<p>
+					Alguien me dijo que tener amigo es tener un tesoro, pero a veces hay que buscar esos tesoros en otros sitios, o en otras historias...
+				</p>
+				<p class="text-black">
+					Intercambia historias, intercambia libros.
+				</p>
+
+				<p>
+					Quisiera saberlo todo acerca de todo!
+				</p>
+
+				<div id="formCity"  class="margin-base-vertical">
+					<p class="input-group">
+						<span class="input-group-addon"></span>
+						<input type="text" class="form-control input-lg" placeholder="¿Dónde vives?" />
+					</p>
+					<p class="help-block text-center"><small>Te agradecemos tu buen gusto</small></p>
+					<p class="text-center">
+						<button id="mainButton" type="button" class="btn btn-success btn-lg">Adelante, caminante!</button>
+					</p>
+					</span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+        <div  class="inner">
+          <div id="listaLibros" class="row">
+          <!--<div class="md-col-3"></div>-->
+          <!--<div class="md-col-3"></div>-->
+          <!--<div class="md-col-3"></div>-->
+          </div>
+
+        </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="app/assets/libraries/bootstrap-3.3.4/dist/js/bootstrap.min.js" ></script>
+        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="app/assets/js/index.js" ></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
