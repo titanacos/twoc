@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html class="no-js"> 
+<html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>libros</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/paper/bootstrap.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="app/assets/libraries/bootstrap-3.3.4/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="app/assets/libraries/bootstrap-3.3.4/dist/css/bootstrap.min.css">
+
+      <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">-->
         <link rel="stylesheet" href="app/assets/css/style.css">
 
         <!-- JS -->
 </head>
 
-		
+
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <body>
 
@@ -57,14 +59,14 @@
 
 		<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-6 col-md-offset-3 text-black">
 
 				<h1 class="margin-base-vertical">Tienes amigos?</h1>
 
 				<p>
 					Alguien me dijo que tener amigo es tener un tesoro, pero a veces hay que buscar esos tesoros en otros sitios, o en otras historias...
 				</p>
-				<p>
+				<p class="text-black">
 					Intercambia historias, intercambia libros.
 				</p>
 
@@ -72,23 +74,33 @@
 					Quisiera saberlo todo acerca de todo!
 				</p>
 
-				<form action="/sendCity" method="post" class="margin-base-vertical">
+				<div id="formCity"  class="margin-base-vertical">
 					<p class="input-group">
 						<span class="input-group-addon"></span>
-						<input type="text" class="form-control input-lg" name="email" placeholder="¿Dónde vives?" />
+						<input type="text" class="form-control input-lg" placeholder="¿Dónde vives?" />
 					</p>
 					<p class="help-block text-center"><small>Te agradecemos tu buen gusto</small></p>
 					<p class="text-center">
-						<button type="submit" class="btn btn-success btn-lg">Adelante, caminante!</button>
+						<button id="mainButton" type="button" class="btn btn-success btn-lg">Adelante, caminante!</button>
 					</p>
 					</span>
-				</form>
+				</div>
 
 			</div>
 		</div>
 	</div>
+        <div  class="inner">
+          <div id="listaLibros" class="row">
+          <!--<div class="md-col-3"></div>-->
+          <!--<div class="md-col-3"></div>-->
+          <!--<div class="md-col-3"></div>-->
+          </div>
+
+        </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="app/assets/libraries/bootstrap-3.3.4/dist/js/bootstrap.min.js" ></script>
+        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="app/assets/js/index.js" ></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
