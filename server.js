@@ -19,7 +19,7 @@ mongoose.connect(config.database, function(err, res) {
 // use body-parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
+app.use(express.static(__dirname + '/public'));
 // basic route for the homepage
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
