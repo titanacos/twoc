@@ -4,3 +4,7 @@ body {
 .text-black{
   color: #00CCFF;
 }
+
+.librillo{
+  cursor: pointer;
+}
